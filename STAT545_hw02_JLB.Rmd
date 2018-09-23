@@ -15,23 +15,69 @@ Task list:
 
 
 ####Getting Started:
-Install Gapminder and dyplyr (through the tidyverse package)
+Install/Load Gapminder and dyplyr (through the tidyverse package)
 ```{r}
-install.packages("gapminder")
 library(gapminder)
-install.packages("tidyverse")
 library(tidyverse)
 ```
 
 
 ####Smell test the data:
 Explore the gapminder object:
+
+**1. Is it a dataframe, matrix, vector, list?**
+typeof() will tell me what data types gapminder contains. 
+```{r}
+?gapminder
+?typeof()
+typeof(gapminder)
+class(gapminder)
+```
+Conclusion: typing ?gapminder in R returns information about the gapminder data. It's format is 
+
+**2. What is its class?**
+
+We can use the class() function to determine the class of the gapminder object:
+```{r}
+?gapminder
+(class(gapminder))
+```
+Conclusion: The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
+
+**3. How many columns/variables?**
+```{r}
+(ncol(gapminder))
+```
+Conclusion: There are 6 different variables in gapminder.
+
+**4. How many rows/observations?**
+```{r}
+(nrow(gapminder))
+```
+Conclusion: There are 1704 observations in gapminder.
+
+
+**5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?**
+```{r}
+(summary(gapminder))
+
+
+```
+Note: using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. 
+This function would be useful for getting a quick overview of the object, as well as useful in the context of needing help with understanding the data and where it comes from.
+
+**What data type is each variable?**
+```{r}
+str(gapminder)
+```
+
 ```{r}
 (typeof(gapminder))
 (str(gapminder))
 (ncol(gapminder))
 (nrow(gapminder))
 (summary(gapminder))
+(class(gapminder))
 ```
 
 ####Explore individual variables
