@@ -33,7 +33,7 @@ typeof() will tell me what data types gapminder contains.
 typeof(gapminder)
 class(gapminder)
 ```
-Conclusion: typing ?gapminder in R returns information about the gapminder data. It's format is 
+Conclusion: typing ?gapminder in R returns information about the gapminder data. It is a data frame that contains list data.
 
 **2. What is its class?**
 
@@ -58,13 +58,18 @@ Conclusion: There are 1704 observations in gapminder.
 
 
 **5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?**
+I found additional information on how to further explore gapminder [here](http://adv-r.had.co.nz/Data-structures.html)
 ```{r}
-(summary(gapminder))
+?gapminder
+length(gapminder) #using length(gapminder) will return how many elements inside it (in this case, it contains 6 elements aka variables, each in the form of a list)
+attributes(gapminder)
 
 
 ```
 Note: using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. 
 This function would be useful for getting a quick overview of the object, as well as useful in the context of needing help with understanding the data and where it comes from.
+
+
 
 **What data type is each variable?**
 ```{r}
