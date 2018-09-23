@@ -2,9 +2,12 @@
 title: "STAT545_hw02_JLB"
 output: github_document
 ---
+
+#STAT 545 Homework 2
+
 The different sections of this homework are broken down into the sections outlined in [the homework instructions](http://stat545.com/Classroom/assignments/hw02/hw02.html): 
 
-Task list: 
+**Homework 2 Task list: **
 1. -[] Getting Started: Install Gapminder & dyplyr
 2. -[]Smell test the data: Explore the gapminder object
 3. -[]Explore individual variables:
@@ -13,8 +16,7 @@ Task list:
 6. -[]Conclusions:
 
 
-
-####Getting Started:
+###Getting Started:
 Install/Load Gapminder and dyplyr (through the tidyverse package)
 ```{r}
 library(gapminder)
@@ -22,68 +24,82 @@ library(tidyverse)
 ```
 
 
-####Smell test the data:
+###Smell test the data:
 Explore the gapminder object:
 
 **1. Is it a dataframe, matrix, vector, list?**
-typeof() will tell me what data types gapminder contains. 
+The typeof() function will tell me what data types gapminder contains. 
+The class() function will tell me the class of the object gapminder.
 ```{r}
 ?gapminder
-?typeof()
 typeof(gapminder)
 class(gapminder)
 ```
-Conclusion: typing ?gapminder in R returns information about the gapminder data. It is a data frame that contains list data.
+Conclusion: 
+- typing ?gapminder in R returns information about the gapminder data. 
+- Gapminder is a data frame that contains list data.
 
 **2. What is its class?**
 
-We can use the class() function to determine the class of the gapminder object:
+As shown above, we can use the class() function to determine the class of the gapminder object:
 ```{r}
 ?gapminder
 (class(gapminder))
 ```
-Conclusion: The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
+Conclusion: 
+The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
 
 **3. How many columns/variables?**
 ```{r}
 (ncol(gapminder))
 ```
-Conclusion: There are 6 different variables in gapminder.
+Conclusion: 
+There are 6 variables in gapminder.
 
 **4. How many rows/observations?**
 ```{r}
 (nrow(gapminder))
 ```
-Conclusion: There are 1704 observations in gapminder.
+Conclusion: 
+There are 1704 observations in gapminder.
 
 
 **5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?**
 I found additional information on how to further explore gapminder [here](http://adv-r.had.co.nz/Data-structures.html)
 ```{r}
 ?gapminder
-length(gapminder) #using length(gapminder) will return how many elements inside it (in this case, it contains 6 elements aka variables, each in the form of a list)
+length(gapminder) 
 attributes(gapminder)
 
-
 ```
-Note: using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. 
-This function would be useful for getting a quick overview of the object, as well as useful in the context of needing help with understanding the data and where it comes from.
+Conclusion: 
 
+a. using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. 
+context: This function would be useful for getting a quick overview of the object, as well as in the context of needing help with understanding the data and where it comes from.
+
+b. Using length(gapminder) will return how many elements are inside it, in this case, returns the number of variables. Another application of the length() function would become useful when looking at the length of variables such as an array. This function would also be useful for creating a loop that repeats for each value within a variable.
+
+c. the attributes(gapminder) function is similar to the summary(), but it gives information about the row names as well. In this context the row names are simply numbers 1, 2, 3, etc..., but in other contexts these names may be more useful. 
 
 
 **What data type is each variable?**
-```{r}
-str(gapminder)
-```
+using the str() function allows us to look at the structure of the variables 
 
 ```{r}
-(typeof(gapminder))
-(str(gapminder))
-(ncol(gapminder))
-(nrow(gapminder))
-(summary(gapminder))
-(class(gapminder))
+
+str(gapminder)
+#to double check the output of str(), I can check a variable individually:
+class(gapminder$year)
+  
 ```
+Conclusion: 
+The variables in gapminder are lists containing different datatypes:
+country - factors
+continent - factors
+year - integers
+lifeExp - numbers
+pop - integers
+gdpPercap - numbers
 
 ####Explore individual variables
 ```{r}

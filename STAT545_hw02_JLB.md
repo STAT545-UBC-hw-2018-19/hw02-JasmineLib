@@ -1,11 +1,14 @@
 STAT545\_hw02\_JLB
 ================
 
+STAT 545 Homework 2
+===================
+
 The different sections of this homework are broken down into the sections outlined in [the homework instructions](http://stat545.com/Classroom/assignments/hw02/hw02.html):
 
-Task list: 1. -\[\] Getting Started: Install Gapminder & dyplyr 2. -\[\]Smell test the data: Explore the gapminder object 3. -\[\]Explore individual variables: 4. -\[\]Explore various plot types: 5. -\[\]Extra exercise: 6. -\[\]Conclusions:
+**Homework 2 Task list: ** 1. -\[\] Getting Started: Install Gapminder & dyplyr 2. -\[\]Smell test the data: Explore the gapminder object 3. -\[\]Explore individual variables: 4. -\[\]Explore various plot types: 5. -\[\]Extra exercise: 6. -\[\]Conclusions:
 
-#### Getting Started:
+### Getting Started:
 
 Install/Load Gapminder and dyplyr (through the tidyverse package)
 
@@ -25,15 +28,14 @@ library(tidyverse)
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
-#### Smell test the data:
+### Smell test the data:
 
 Explore the gapminder object:
 
-**1. Is it a dataframe, matrix, vector, list?** typeof() will tell me what data types gapminder contains.
+**1. Is it a dataframe, matrix, vector, list?** The typeof() function will tell me what data types gapminder contains. The class() function will tell me the class of the object gapminder.
 
 ``` r
 ?gapminder
-?typeof()
 typeof(gapminder)
 ```
 
@@ -45,11 +47,11 @@ class(gapminder)
 
     ## [1] "tbl_df"     "tbl"        "data.frame"
 
-Conclusion: typing ?gapminder in R returns information about the gapminder data. It is a data frame that contains list data.
+Conclusion: - typing ?gapminder in R returns information about the gapminder data. - Gapminder is a data frame that contains list data.
 
 **2. What is its class?**
 
-We can use the class() function to determine the class of the gapminder object:
+As shown above, we can use the class() function to determine the class of the gapminder object:
 
 ``` r
 ?gapminder
@@ -58,7 +60,7 @@ We can use the class() function to determine the class of the gapminder object:
 
     ## [1] "tbl_df"     "tbl"        "data.frame"
 
-Conclusion: The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
+Conclusion: \* - The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
 
 **3. How many columns/variables?**
 
@@ -68,7 +70,9 @@ Conclusion: The class of gapminder is a data frame, specifically, a tibble (whic
 
     ## [1] 6
 
-Conclusion: There are 6 different variables in gapminder.
+Conclusion:
+
+There are 6 variables in gapminder.
 
 **4. How many rows/observations?**
 
@@ -78,7 +82,7 @@ Conclusion: There are 6 different variables in gapminder.
 
     ## [1] 1704
 
-Conclusion: There are 1704 observations in gapminder.
+Conclusion: - There are 1704 observations in gapminder.
 
 **5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?** I found additional information on how to further explore gapminder [here](http://adv-r.had.co.nz/Data-structures.html)
 
@@ -233,9 +237,9 @@ attributes(gapminder)
     ## [1691] 1691 1692 1693 1694 1695 1696 1697 1698 1699 1700 1701 1702 1703
     ## [1704] 1704
 
-Note: using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. This function would be useful for getting a quick overview of the object, as well as useful in the context of needing help with understanding the data and where it comes from.
+Conclusion: - using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. + context: This function would be useful for getting a quick overview of the object, as well as in the context of needing help with understanding the data and where it comes from.
 
-**What data type is each variable?**
+**What data type is each variable?** using the str() function allows us to look at the structure
 
 ``` r
 str(gapminder)
