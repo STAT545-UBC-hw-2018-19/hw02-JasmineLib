@@ -102,8 +102,29 @@ pop - integers
 gdpPercap - numbers
 
 ####Explore individual variables
-```{r}
 
+I am curious about a few questions regarding this data, notably, the following questions:
+
+1. What is the relationship between life expectancy and GDP per capita?
+2. How did life expectancy in the continent of Africa change over time?
+
+In order to address these questions, I will need to consider several variables:
+
+1. Is there a relationship between lifeExpectancy and gdpPercap?
+    Life expectancy, GDP per capita. I will also need to consider a particular year. 
+    
+2. How did life expectancy in the continent of Africa change over time?
+    To answer this question, I will need to look at the continent variable as well as the year variable.
+
+What are possible values (or range, whichever is appropriate) of each variable?
+What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
+Feel free to use summary stats, tables, figures. We’re NOT expecting high production value (yet).
+
+```{r}
+min(gapminder$year)
+max(gapminder$year)
+range(gapminder$year)
+summary(gapminder$continent)
 ```
 
 ####Explore various plot types
