@@ -117,7 +117,7 @@ the range of years in the gapminder dataset is 1952-2007.
 
 Looking at the spread of values :
 ```{r}
-spread(gapminder, key,value)
+#spread(gapminder, key,value)
 ```
 
 I can also use the min(), max() and range() functions with the lifeExp, because it contains integers, however, this will not work for the country variable, as these functions do not apply.
@@ -173,6 +173,13 @@ gapminder %>%
 ```
 
 - A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
+
+```{r}
+
+```
+
+
+
 ```{r}
 gapminder %>%
   select(gdpPercap, continent) %>% 
