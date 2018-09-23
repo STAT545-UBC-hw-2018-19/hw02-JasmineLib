@@ -1,0 +1,57 @@
+---
+title: "STAT545_hw02_JLB"
+output: github_document
+---
+The different sections of this homework are broken down into the sections outlined in [the homework instructions](http://stat545.com/Classroom/assignments/hw02/hw02.html): 
+
+Task list: 
+1. -[] Getting Started: Install Gapminder & dyplyr
+2. -[]Smell test the data: Explore the gapminder object
+3. -[]Explore individual variables:
+4. -[]Explore various plot types: 
+5. -[]Extra exercise: 
+6. -[]Conclusions:
+
+
+
+####Getting Started:
+Install Gapminder and dyplyr (through the tidyverse package)
+```{r}
+install.packages("gapminder")
+library(gapminder)
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+####Smell test the data:
+Explore the gapminder object:
+```{r}
+(typeof(gapminder))
+(str(gapminder))
+(ncol(gapminder))
+(nrow(gapminder))
+(summary(gapminder))
+```
+
+####Explore individual variables
+```{r}
+
+```
+
+####Explore various plot types
+ - A scatterplot of two quantitative variables.
+ - A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
+ - A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries.
+```{r}
+
+```
+
+
+####Extra Exercise:
+
+Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+
