@@ -17,14 +17,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
     ## ✔ tibble  1.4.1     ✔ dplyr   0.7.4
     ## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
     ## ✔ readr   1.1.1     ✔ forcats 0.2.0
 
-    ## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -60,7 +60,7 @@ As shown above, we can use the class() function to determine the class of the ga
 
     ## [1] "tbl_df"     "tbl"        "data.frame"
 
-Conclusion: \* - The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
+Conclusion: The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
 
 **3. How many columns/variables?**
 
@@ -70,9 +70,7 @@ Conclusion: \* - The class of gapminder is a data frame, specifically, a tibble 
 
     ## [1] 6
 
-Conclusion:
-
-There are 6 variables in gapminder.
+Conclusion: There are 6 variables in gapminder.
 
 **4. How many rows/observations?**
 
@@ -82,13 +80,13 @@ There are 6 variables in gapminder.
 
     ## [1] 1704
 
-Conclusion: - There are 1704 observations in gapminder.
+Conclusion: There are 1704 observations in gapminder.
 
 **5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?** I found additional information on how to further explore gapminder [here](http://adv-r.had.co.nz/Data-structures.html)
 
 ``` r
 ?gapminder
-length(gapminder) #using length(gapminder) will return how many elements inside it (in this case, it contains 6 elements aka variables, each in the form of a list)
+length(gapminder) 
 ```
 
     ## [1] 6
@@ -237,9 +235,15 @@ attributes(gapminder)
     ## [1691] 1691 1692 1693 1694 1695 1696 1697 1698 1699 1700 1701 1702 1703
     ## [1704] 1704
 
-Conclusion: - using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. + context: This function would be useful for getting a quick overview of the object, as well as in the context of needing help with understanding the data and where it comes from.
+Conclusion:
 
-**What data type is each variable?** using the str() function allows us to look at the structure
+1.  using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. context: This function would be useful for getting a quick overview of the object, as well as in the context of needing help with understanding the data and where it comes from.
+
+2.  Using length(gapminder) will return how many elements are inside it, in this case, returns the number of variables. Another application of the length() function would become useful when looking at the length of variables such as an array. This function would also be useful for creating a loop that repeats for each value within a variable.
+
+3.  the attributes(gapminder) function is similar to the summary(), but it gives information about the row names as well. In this context the row names are simply numbers 1, 2, 3, etc..., but in other contexts these names may be more useful.
+
+**What data type is each variable?** using the str() function allows us to look at the structure of the variables
 
 ``` r
 str(gapminder)
@@ -254,73 +258,136 @@ str(gapminder)
     ##  $ gdpPercap: num  779 821 853 836 740 ...
 
 ``` r
-(typeof(gapminder))
+#to double check the output of str(), I can check a variable individually:
+class(gapminder$year)
 ```
 
-    ## [1] "list"
+    ## [1] "integer"
 
-``` r
-(str(gapminder))
-```
-
-    ## Classes 'tbl_df', 'tbl' and 'data.frame':    1704 obs. of  6 variables:
-    ##  $ country  : Factor w/ 142 levels "Afghanistan",..: 1 1 1 1 1 1 1 1 1 1 ...
-    ##  $ continent: Factor w/ 5 levels "Africa","Americas",..: 3 3 3 3 3 3 3 3 3 3 ...
-    ##  $ year     : int  1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
-    ##  $ lifeExp  : num  28.8 30.3 32 34 36.1 ...
-    ##  $ pop      : int  8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
-    ##  $ gdpPercap: num  779 821 853 836 740 ...
-
-    ## NULL
-
-``` r
-(ncol(gapminder))
-```
-
-    ## [1] 6
-
-``` r
-(nrow(gapminder))
-```
-
-    ## [1] 1704
-
-``` r
-(summary(gapminder))
-```
-
-    ##         country        continent        year         lifeExp     
-    ##  Afghanistan:  12   Africa  :624   Min.   :1952   Min.   :23.60  
-    ##  Albania    :  12   Americas:300   1st Qu.:1966   1st Qu.:48.20  
-    ##  Algeria    :  12   Asia    :396   Median :1980   Median :60.71  
-    ##  Angola     :  12   Europe  :360   Mean   :1980   Mean   :59.47  
-    ##  Argentina  :  12   Oceania : 24   3rd Qu.:1993   3rd Qu.:70.85  
-    ##  Australia  :  12                  Max.   :2007   Max.   :82.60  
-    ##  (Other)    :1632                                                
-    ##       pop              gdpPercap       
-    ##  Min.   :6.001e+04   Min.   :   241.2  
-    ##  1st Qu.:2.794e+06   1st Qu.:  1202.1  
-    ##  Median :7.024e+06   Median :  3531.8  
-    ##  Mean   :2.960e+07   Mean   :  7215.3  
-    ##  3rd Qu.:1.959e+07   3rd Qu.:  9325.5  
-    ##  Max.   :1.319e+09   Max.   :113523.1  
-    ## 
-
-``` r
-(class(gapminder))
-```
-
-    ## [1] "tbl_df"     "tbl"        "data.frame"
+Conclusion: The variables in gapminder are lists containing different datatypes: country - factors continent - factors year - integers lifeExp - numbers pop - integers gdpPercap - numbers
 
 #### Explore individual variables
 
+#### Exploring the year variable:
+
+I can look at the range of years contained in the data: The min() function shows the earliest year, while the max() function shows the latest year. The range() function gives both min and max as an output (ie, the range of the years).
+
+``` r
+min(gapminder$year)
+```
+
+    ## [1] 1952
+
+``` r
+max(gapminder$year)
+```
+
+    ## [1] 2007
+
+``` r
+range(gapminder$year)
+```
+
+    ## [1] 1952 2007
+
+**Conclusion:** the range of years in the gapminder dataset is 1952-2007.
+
+Looking at the spread of values :
+
+``` r
+#spread(gapminder, key,value)
+```
+
+I can also use the min(), max() and range() functions with the lifeExp, because it contains integers, however, this will not work for the country variable, as these functions do not apply.
+
+``` r
+min(gapminder$lifeExp)
+```
+
+    ## [1] 23.599
+
+``` r
+max(gapminder$lifeExp)
+```
+
+    ## [1] 82.603
+
+``` r
+range(gapminder$lifeExp)
+```
+
+    ## [1] 23.599 82.603
+
+Conclusion: The range of life expectancies contained in the gapminder dataset is 23.6 - 82.6 years.
+
+To look at the distribution of the continent variable:
+
+``` r
+attributes(gapminder$continent)
+```
+
+    ## $levels
+    ## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania" 
+    ## 
+    ## $class
+    ## [1] "factor"
+
+These values seem typical, as they are representative of the world's continents.
+
+SUMMARY TABLE:
+
+Looking more closely at the country and lifeExp variables:
+
+``` r
+select(gapminder, country, year, lifeExp) %>% 
+  filter(year == "2007") %>% 
+  summary()
+```
+
+    ##         country         year         lifeExp     
+    ##  Afghanistan:  1   Min.   :2007   Min.   :39.61  
+    ##  Albania    :  1   1st Qu.:2007   1st Qu.:57.16  
+    ##  Algeria    :  1   Median :2007   Median :71.94  
+    ##  Angola     :  1   Mean   :2007   Mean   :67.01  
+    ##  Argentina  :  1   3rd Qu.:2007   3rd Qu.:76.41  
+    ##  Australia  :  1   Max.   :2007   Max.   :82.60  
+    ##  (Other)    :136
+
 #### Explore various plot types
 
--   A scatterplot of two quantitative variables.
--   A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
--   A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries.
+useful [site](https://stackoverflow.com/questions/10438752/adding-x-and-y-axis-labels-in-ggplot2) for how to add axis labels and title for your ggplot
 
-#### Extra Exercise:
+-   A scatterplot of two quantitative variables.
+
+``` r
+gapminder %>% 
+  filter(country == "Canada") %>% 
+  ggplot(aes(x=year, y=pop, xlab = "Year", ylab = "Population")) + 
+  geom_point() +
+  xlab("Year") +
+  ylab("Population of Canada") +
+  ggtitle("Canadian Population")
+```
+
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-14-1.png)
+
+-   A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
+
+``` r
+gapminder %>%
+  select(gdpPercap, continent) %>% 
+  ggplot(aes(continent, gdpPercap)) +
+  scale_y_log10() +
+  geom_violin() +
+  geom_jitter(alpha = 0.15) +
+  xlab("Continent")+
+  ylab("GDP Per Capita (log10)") +
+  ggtitle("GDP Per Capita by Continent")
+```
+
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-16-1.png)
+
+-   A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries. \#\#\#\#Extra Exercise:
 
 Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
 

@@ -103,39 +103,90 @@ gdpPercap - numbers
 
 ####Explore individual variables
 
-I am curious about a few questions regarding this data, notably, the following questions:
-
-1. What is the relationship between life expectancy and GDP per capita?
-2. How did life expectancy in the continent of Africa change over time?
-
-In order to address these questions, I will need to consider several variables:
-
-1. Is there a relationship between lifeExpectancy and gdpPercap?
-    Life expectancy, GDP per capita. I will also need to consider a particular year. 
-    
-2. How did life expectancy in the continent of Africa change over time?
-    To answer this question, I will need to look at the continent variable as well as the year variable.
-
-What are possible values (or range, whichever is appropriate) of each variable?
-What values are typical? What’s the spread? What’s the distribution? Etc., tailored to the variable at hand.
-Feel free to use summary stats, tables, figures. We’re NOT expecting high production value (yet).
+####Exploring the year variable:
+I can look at the range of years contained in the data:
+The min() function shows the earliest year, while the max() function shows the latest year. The range() function gives both min and max as an output (ie, the range of the years). 
 
 ```{r}
 min(gapminder$year)
 max(gapminder$year)
 range(gapminder$year)
-summary(gapminder$continent)
+```
+**Conclusion:**
+the range of years in the gapminder dataset is 1952-2007.
+
+Looking at the spread of values :
+```{r}
+spread(gapminder, key,value)
 ```
 
-####Explore various plot types
- - A scatterplot of two quantitative variables.
- - A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
- - A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries.
+I can also use the min(), max() and range() functions with the lifeExp, because it contains integers, however, this will not work for the country variable, as these functions do not apply.
+```{r}
+min(gapminder$lifeExp)
+max(gapminder$lifeExp)
+range(gapminder$lifeExp)
+
+```
+Conclusion: 
+The range of life expectancies contained in the gapminder dataset is 23.6 - 82.6 years.
+
+To look at the distribution of the continent variable:
+```{r}
+attributes(gapminder$continent)
+```
+These values seem typical, as they are representative of the world's continents.
+
+
+
+
+SUMMARY TABLE:
+
+
+
+Looking more closely at the country and lifeExp variables: 
+```{r}
+select(gapminder, country, year, lifeExp) %>% 
+  filter(year == "2007") %>% 
+  summary()
+
+```
+
 ```{r}
 
 ```
 
 
+####Explore various plot types
+ useful [site](https://stackoverflow.com/questions/10438752/adding-x-and-y-axis-labels-in-ggplot2) for how to add axis labels and title for your ggplot
+
+ - A scatterplot of two quantitative variables.
+
+```{r}
+gapminder %>% 
+  filter(country == "Canada") %>% 
+  ggplot(aes(x=year, y=pop, xlab = "Year", ylab = "Population")) + 
+  geom_point() +
+  xlab("Year") +
+  ylab("Population of Canada") +
+  ggtitle("Canadian Population")
+
+```
+
+- A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
+```{r}
+gapminder %>%
+  select(gdpPercap, continent) %>% 
+  ggplot(aes(continent, gdpPercap)) +
+  scale_y_log10() +
+  geom_violin() +
+  geom_jitter(alpha = 0.15) +
+  xlab("Continent")+
+  ylab("GDP Per Capita (log10)") +
+  ggtitle("GDP Per Capita by Continent")
+  
+```
+
+ - A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries.
 ####Extra Exercise:
 
 Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
