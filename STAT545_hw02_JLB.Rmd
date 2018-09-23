@@ -164,13 +164,24 @@ select(gapminder, country, year, lifeExp) %>%
 ```{r}
 gapminder %>% 
   filter(country == "Canada") %>% 
-  ggplot(aes(x=year, y=pop, xlab = "Year", ylab = "Population")) + 
+  ggplot(aes(x=year, y=pop)) + 
   geom_point() +
   xlab("Year") +
   ylab("Population of Canada") +
   ggtitle("Canadian Population")
 
 ```
+```{r}
+gapminder %>% 
+  filter(continent =="Americas") %>% 
+  ggplot(aes(x = year, y = pop)) +
+  geom_line(aes(group = country), alpha = 0.5)+
+  geom_jitter(alpha = 0.2) +
+  xlab("Year")+
+  ylab("Population") +
+  ggtitle("Population")
+```
+
 
 - A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
 
