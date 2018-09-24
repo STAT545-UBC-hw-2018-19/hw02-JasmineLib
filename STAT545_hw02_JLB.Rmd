@@ -7,16 +7,17 @@ output: github_document
 
 The different sections of this homework are broken down into the sections outlined in [the homework instructions](http://stat545.com/Classroom/assignments/hw02/hw02.html): 
 
-**Homework 2 Task list: **
-1. -[] Getting Started: Install Gapminder & dyplyr
-2. -[]Smell test the data: Explore the gapminder object
-3. -[]Explore individual variables:
-4. -[]Explore various plot types: 
-5. -[]Extra exercise: 
-6. -[]Conclusions:
+**Homework 2 Task list: **  
+
+1. [x] Getting Started: Install Gapminder & dyplyr  
+2. [ ]Smell test the data: Explore the gapminder object  
+3. [ ]Explore individual variables:  
+4. [ ]Explore various plot types:   
+5. [ ]Extra exercise:   
+6. [ ]Conclusions and Reflection:  
 
 
-###Getting Started:
+### 1. Getting Started:   
 Install/Load Gapminder and dyplyr (through the tidyverse package)
 ```{r}
 library(gapminder)
@@ -24,11 +25,11 @@ library(tidyverse)
 ```
 
 
-###Smell test the data:
+### 2. Smell test the data:
 Explore the gapminder object:
 
-**1. Is it a dataframe, matrix, vector, list?**
-The typeof() function will tell me what data types gapminder contains. 
+**2a. Is it a dataframe, matrix, vector, list?**  
+The typeof() function will tell me what data types gapminder contains.   
 The class() function will tell me the class of the object gapminder.
 ```{r}
 ?gapminder
@@ -36,61 +37,53 @@ typeof(gapminder)
 class(gapminder)
 ```
 Conclusion: 
-- typing ?gapminder in R returns information about the gapminder data. 
 - Gapminder is a data frame that contains list data.
 
-**2. What is its class?**
-
+**2b. What is its class?**  
 As shown above, we can use the class() function to determine the class of the gapminder object:
 ```{r}
-?gapminder
 (class(gapminder))
 ```
 Conclusion: 
 The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
 
-**3. How many columns/variables?**
+**2c. How many columns/variables?**
 ```{r}
 (ncol(gapminder))
 ```
 Conclusion: 
 There are 6 variables in gapminder.
 
-**4. How many rows/observations?**
+**2d. How many rows/observations?**
 ```{r}
 (nrow(gapminder))
 ```
 Conclusion: 
 There are 1704 observations in gapminder.
 
-
-**5. Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?**
+**2e Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?**  
 I found additional information on how to further explore gapminder [here](http://adv-r.had.co.nz/Data-structures.html)
 ```{r}
 ?gapminder
 length(gapminder) 
-attributes(gapminder)
-
+#attributes(gapminder)
 ```
 Conclusion: 
 
-a. using ?gapminder is another quick way to get information about gapminder including: the format, the names and types of variables inside the object, and specific descriptions of each variable. 
-context: This function would be useful for getting a quick overview of the object, as well as in the context of needing help with understanding the data and where it comes from.
+a. using ?gapminder is another way to get information about gapminder such as format, names and types of variables in the object, and specific descriptions of each variable. 
+context: This function is useful for getting a quick overview and understanding the data and where it comes from.
 
-b. Using length(gapminder) will return how many elements are inside it, in this case, returns the number of variables. Another application of the length() function would become useful when looking at the length of variables such as an array. This function would also be useful for creating a loop that repeats for each value within a variable.
+b. length(gapminder) returns the number of elements inside it, in this case, the number of variables. Another application of the length() function is to look at length of and array variable, allowing users to make a loop that repeats for each value in the array.
 
-c. the attributes(gapminder) function is similar to the summary(), but it gives information about the row names as well. In this context the row names are simply numbers 1, 2, 3, etc..., but in other contexts these names may be more useful. 
+c. the attributes(gapminder) function is similar to summary(), but gives information about row names as well. In this context the row names are simply numbers 1, 2, 3, etc... (so, less useful), but in other contexts these names may be more informative. 
 
 
-**What data type is each variable?**
+**2f What data type is each variable?**  
 using the str() function allows us to look at the structure of the variables 
-
 ```{r}
-
 str(gapminder)
 #to double check the output of str(), I can check a variable individually:
 class(gapminder$year)
-  
 ```
 Conclusion: 
 The variables in gapminder are lists containing different datatypes:
@@ -101,19 +94,22 @@ lifeExp - numbers
 pop - integers
 gdpPercap - numbers
 
-####Explore individual variables
+#### 3. Explore individual variables
+Categorical variable selected: continent
+Quantitative variable selected: gdpPercap
 
-####Exploring the year variable:
-I can look at the range of years contained in the data:
-The min() function shows the earliest year, while the max() function shows the latest year. The range() function gives both min and max as an output (ie, the range of the years). 
+** 3a. Exploring possible values (or range, whichever is appropriate) of variables:**  
+
+I can look at the range of GDP per capitda in the data:  
+The min() function shows the lowest, while the max() function shows the highest GDP per Capita. The range() function gives both min and max as an output. 
 
 ```{r}
-min(gapminder$year)
-max(gapminder$year)
-range(gapminder$year)
+min(gapminder$gdpPercap)
+max(gapminder$gdpPercap)
+range(gapminder$gdpPercap)
 ```
-**Conclusion:**
-the range of years in the gapminder dataset is 1952-2007.
+**Conclusion:**  
+the range of GDP per capitda in the gapminder dataset is $241-113 523.
 
 Looking at the spread of values :
 ```{r}
@@ -148,7 +144,6 @@ Looking more closely at the country and lifeExp variables:
 select(gapminder, country, year, lifeExp) %>% 
   filter(year == "2007") %>% 
   summary()
-
 ```
 
 ```{r}
@@ -251,21 +246,41 @@ gapminder %>%
 
 Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
 ```{r}
-?filter()
-
+#no they were not successful. 
 
 filter(gapminder, country == c("Rwanda", "Afghanistan"))
 
-#looking at the data that results from this code, the analyst's code returns 12 rows of data. 
+#looking at the data that results from this code, the analyst's code returns 12 rows of data (8 for Rwanda, 8 for Afghanistan). 
 #when I run the code below: 
+
 gapminder %>% 
   filter (country =="Rwanda" | country == "Afghanistan")
 #I get 24 rows of data. It appears that somehow, by concatenating the countries he wanted to collect data for, the analyst ommitted half of the rows. 
 
 #why?
+#When we use the combine function it will go row by row through the different countries
+#it will compare row1 with "Rwanda"
+#then it will compare row2 with "Afghanistan"
+#Then it will start over and compare row 3 == "Rwanda", and if row 4 =="Afghanistan", etc. 
+#If the result is TRUE, then it will add it to the tibble. 
+#However, this means rows containing "Rwanda" will return FALSE if the code is currently comparing to "Afghanistan" and vice versa
+
+#To test if this explanation is true, if I run the code below, I should obtain 8 rows with values for Rwanda, but only 4 for Afghanistan (note - this is only applicable for this dataset, as I know there are equal rows for Rwanda and Afghanistan, organized alphabetically. The result would be different for another dataset). 
+
+filter(gapminder, country == c("Rwanda", "Afghanistan", "Rwanda"))
+
+## Interestingly, I noticed that the length of the combined list must be divisible into the number of rows in the dataframe. 
+#If I try to run the code below, it will return an error. 
+
+#filter(gapminder, country == c("Rwanda", "Afghanistan", "Norway", "China", "Japan")) 
+
+#The reason for this is because it must be able to fully cycle through the combined list, we cannot divide 5 into the number of rows of data in gapminder. 
 
 
-
+#conclude: 
+#a correct way to run the code is: 
+gapminder %>% 
+  filter (country =="Rwanda" | country == "Afghanistan")
 ```
 
 

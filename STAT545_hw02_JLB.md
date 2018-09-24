@@ -6,9 +6,16 @@ STAT 545 Homework 2
 
 The different sections of this homework are broken down into the sections outlined in [the homework instructions](http://stat545.com/Classroom/assignments/hw02/hw02.html):
 
-**Homework 2 Task list: ** 1. -\[\] Getting Started: Install Gapminder & dyplyr 2. -\[\]Smell test the data: Explore the gapminder object 3. -\[\]Explore individual variables: 4. -\[\]Explore various plot types: 5. -\[\]Extra exercise: 6. -\[\]Conclusions:
+**Homework 2 Task list: **
 
-### Getting Started:
+1.  \[x\] Getting Started: Install Gapminder & dyplyr
+2.  \[ \]Smell test the data: Explore the gapminder object
+3.  \[ \]Explore individual variables:
+4.  \[ \]Explore various plot types:
+5.  \[ \]Extra exercise:
+6.  \[ \]Conclusions and Reflection:
+
+### 1. Getting Started:
 
 Install/Load Gapminder and dyplyr (through the tidyverse package)
 
@@ -28,11 +35,11 @@ library(tidyverse)
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
-### Smell test the data:
+### 2. Smell test the data:
 
 Explore the gapminder object:
 
-**1. Is it a dataframe, matrix, vector, list?** The typeof() function will tell me what data types gapminder contains. The class() function will tell me the class of the object gapminder.
+**2a. Is it a dataframe, matrix, vector, list?** The typeof() function will tell me what data types gapminder contains. The class() function will tell me the class of the object gapminder.
 
 ``` r
 ?gapminder
@@ -47,14 +54,13 @@ class(gapminder)
 
     ## [1] "tbl_df"     "tbl"        "data.frame"
 
-Conclusion: - typing ?gapminder in R returns information about the gapminder data. - Gapminder is a data frame that contains list data.
+Conclusion: - Gapminder is a data frame that contains list data.
 
-**2. What is its class?**
+**2b. What is its class?**
 
 As shown above, we can use the class() function to determine the class of the gapminder object:
 
 ``` r
-?gapminder
 (class(gapminder))
 ```
 
@@ -62,7 +68,7 @@ As shown above, we can use the class() function to determine the class of the ga
 
 Conclusion: The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
 
-**3. How many columns/variables?**
+**2c. How many columns/variables?**
 
 ``` r
 (ncol(gapminder))
@@ -72,7 +78,7 @@ Conclusion: The class of gapminder is a data frame, specifically, a tibble (whic
 
 Conclusion: There are 6 variables in gapminder.
 
-**4. How many rows/observations?**
+**2d. How many rows/observations?**
 
 ``` r
 (nrow(gapminder))
@@ -502,19 +508,8 @@ gapminder %>%
 Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
 
 ``` r
-?filter()
-```
+#no they were not successful. 
 
-    ## Help on topic 'filter' was found in the following packages:
-    ## 
-    ##   Package               Library
-    ##   dplyr                 /Library/Frameworks/R.framework/Versions/3.3/Resources/library
-    ##   stats                 /Library/Frameworks/R.framework/Versions/3.3/Resources/library
-    ## 
-    ## 
-    ## Using the first match ...
-
-``` r
 filter(gapminder, country == c("Rwanda", "Afghanistan"))
 ```
 
@@ -535,8 +530,9 @@ filter(gapminder, country == c("Rwanda", "Afghanistan"))
     ## 12 Rwanda      Africa     2002    43.4  7852401       786
 
 ``` r
-#looking at the data that results from this code, the analyst's code returns 12 rows of data. 
+#looking at the data that results from this code, the analyst's code returns 12 rows of data (8 for Rwanda, 8 for Afghanistan). 
 #when I run the code below: 
+
 gapminder %>% 
   filter (country =="Rwanda" | country == "Afghanistan")
 ```
@@ -560,4 +556,60 @@ gapminder %>%
 #I get 24 rows of data. It appears that somehow, by concatenating the countries he wanted to collect data for, the analyst ommitted half of the rows. 
 
 #why?
+#When we use the combine function it will go row by row through the different countries
+#it will compare row1 with "Rwanda"
+#then it will compare row2 with "Afghanistan"
+#Then it will start over and compare row 3 == "Rwanda", and if row 4 =="Afghanistan", etc. 
+#If the result is TRUE, then it will add it to the tibble. 
+#However, this means rows containing "Rwanda" will return FALSE if the code is currently comparing to "Afghanistan" and vice versa
+
+#To test if this explanation is true, if I run the code below, I should obtain 8 rows with values for Rwanda, but only 4 for Afghanistan (note - this is only applicable for this dataset, as I know there are equal rows for Rwanda and Afghanistan, organized alphabetically. The result would be different for another dataset). 
+
+filter(gapminder, country == c("Rwanda", "Afghanistan", "Rwanda"))
 ```
+
+    ## # A tibble: 12 x 6
+    ##    country     continent  year lifeExp      pop gdpPercap
+    ##    <fctr>      <fctr>    <int>   <dbl>    <int>     <dbl>
+    ##  1 Afghanistan Asia       1957    30.3  9240934       821
+    ##  2 Afghanistan Asia       1972    36.1 13079460       740
+    ##  3 Afghanistan Asia       1987    40.8 13867957       852
+    ##  4 Afghanistan Asia       2002    42.1 25268405       727
+    ##  5 Rwanda      Africa     1952    40.0  2534927       493
+    ##  6 Rwanda      Africa     1962    43.0  3051242       597
+    ##  7 Rwanda      Africa     1967    44.1  3451079       511
+    ##  8 Rwanda      Africa     1977    45.0  4657072       670
+    ##  9 Rwanda      Africa     1982    46.2  5507565       882
+    ## 10 Rwanda      Africa     1992    23.6  7290203       737
+    ## 11 Rwanda      Africa     1997    36.1  7212583       590
+    ## 12 Rwanda      Africa     2007    46.2  8860588       863
+
+``` r
+## Interestingly, I noticed that the length of the combined list must be divisible into the number of rows in the dataframe. 
+#If I try to run the code below, it will return an error. 
+
+#filter(gapminder, country == c("Rwanda", "Afghanistan", "Norway", "China", "Japan")) 
+
+#The reason for this is because it must be able to fully cycle through the combined list, we cannot divide 5 into the number of rows of data in gapminder. 
+
+
+#conclude: 
+#a correct way to run the code is: 
+gapminder %>% 
+  filter (country =="Rwanda" | country == "Afghanistan")
+```
+
+    ## # A tibble: 24 x 6
+    ##    country     continent  year lifeExp      pop gdpPercap
+    ##    <fctr>      <fctr>    <int>   <dbl>    <int>     <dbl>
+    ##  1 Afghanistan Asia       1952    28.8  8425333       779
+    ##  2 Afghanistan Asia       1957    30.3  9240934       821
+    ##  3 Afghanistan Asia       1962    32.0 10267083       853
+    ##  4 Afghanistan Asia       1967    34.0 11537966       836
+    ##  5 Afghanistan Asia       1972    36.1 13079460       740
+    ##  6 Afghanistan Asia       1977    38.4 14880372       786
+    ##  7 Afghanistan Asia       1982    39.9 12881816       978
+    ##  8 Afghanistan Asia       1987    40.8 13867957       852
+    ##  9 Afghanistan Asia       1992    41.7 16317921       649
+    ## 10 Afghanistan Asia       1997    41.8 22227415       635
+    ## # ... with 14 more rows
