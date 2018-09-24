@@ -17,14 +17,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
     ## ✔ tibble  1.4.1     ✔ dplyr   0.7.4
     ## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
     ## ✔ readr   1.1.1     ✔ forcats 0.2.0
 
-    ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -360,18 +360,68 @@ useful [site](https://stackoverflow.com/questions/10438752/adding-x-and-y-axis-l
 -   A scatterplot of two quantitative variables.
 
 ``` r
+#similar to how we saw filtering by a variable such as 'country' in class for geom_line, we can also do this to assign colours using colour = country. 
+
 gapminder %>% 
-  filter(country == "Canada") %>% 
-  ggplot(aes(x=year, y=pop, xlab = "Year", ylab = "Population")) + 
+  
+  filter(country == "Canada"|country == "United States") %>% 
+  ggplot(aes(x=year, y=pop)) + 
   geom_point() +
+  geom_line(aes(filter = country,colour = country)) +
   xlab("Year") +
-  ylab("Population of Canada") +
-  ggtitle("Canadian Population")
+  ylab("Population of Canada and United States") +
+  ggtitle("North American Population Trends")
 ```
+
+    ## Warning: Ignoring unknown aesthetics: filter
 
 ![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
+``` r
+gapminder %>% 
+  filter(country == "Canada" | country =="United States")%>% 
+  ggplot(aes(x=year, y = gdpPercap)) +
+  geom_line(aes(group = country, colour = country)) +
+  geom_point() +
+  xlab("Year") +
+  ylab("GDP Per Capita") +
+  ggtitle("North American GDP Per Capita Trends")
+```
+
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-15-1.png)
+
 -   A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
+
+``` r
+gapminder %>%
+  filter (year == "2007") %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_histogram(aes(y=..density..),bins = 35) + 
+  geom_density(fill = "green", alpha = 0.2)
+```
+
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-16-1.png)
+
+``` r
+#looking more closely at the spread of density where gdpPercap is less than 10 000:
+
+gapminder 
+```
+
+    ## # A tibble: 1,704 x 6
+    ##    country     continent  year lifeExp      pop gdpPercap
+    ##    <fctr>      <fctr>    <int>   <dbl>    <int>     <dbl>
+    ##  1 Afghanistan Asia       1952    28.8  8425333       779
+    ##  2 Afghanistan Asia       1957    30.3  9240934       821
+    ##  3 Afghanistan Asia       1962    32.0 10267083       853
+    ##  4 Afghanistan Asia       1967    34.0 11537966       836
+    ##  5 Afghanistan Asia       1972    36.1 13079460       740
+    ##  6 Afghanistan Asia       1977    38.4 14880372       786
+    ##  7 Afghanistan Asia       1982    39.9 12881816       978
+    ##  8 Afghanistan Asia       1987    40.8 13867957       852
+    ##  9 Afghanistan Asia       1992    41.7 16317921       649
+    ## 10 Afghanistan Asia       1997    41.8 22227415       635
+    ## # ... with 1,694 more rows
 
 ``` r
 gapminder %>%
@@ -385,7 +435,7 @@ gapminder %>%
   ggtitle("GDP Per Capita by Continent")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-16-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-17-1.png)
 
 -   A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries. \#\#\#\#Extra Exercise:
 

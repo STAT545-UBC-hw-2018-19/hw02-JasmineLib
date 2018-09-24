@@ -162,31 +162,50 @@ select(gapminder, country, year, lifeExp) %>%
  - A scatterplot of two quantitative variables.
 
 ```{r}
+#similar to how we saw filtering by a variable such as 'country' in class for geom_line, we can also do this to assign colours using colour = country. 
+
 gapminder %>% 
-  filter(country == "Canada") %>% 
+  
+  filter(country == "Canada"|country == "United States") %>% 
   ggplot(aes(x=year, y=pop)) + 
   geom_point() +
+  geom_line(aes(filter = country,colour = country)) +
   xlab("Year") +
-  ylab("Population of Canada") +
-  ggtitle("Canadian Population")
+  ylab("Population of Canada and United States") +
+  ggtitle("North American Population Trends")
+
+  
 
 ```
+
+
 ```{r}
 gapminder %>% 
-  filter(continent =="Americas") %>% 
-  ggplot(aes(x = year, y = pop)) +
-  geom_line(aes(group = country), alpha = 0.5)+
-  geom_jitter(alpha = 0.2) +
-  xlab("Year")+
-  ylab("Population") +
-  ggtitle("Population")
+  filter(country == "Canada" | country =="United States")%>% 
+  ggplot(aes(x=year, y = gdpPercap)) +
+  geom_line(aes(group = country, colour = country)) +
+  geom_point() +
+  xlab("Year") +
+  ylab("GDP Per Capita") +
+  ggtitle("North American GDP Per Capita Trends")
+  
 ```
+
 
 
 - A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
 
 ```{r}
+gapminder %>%
+  filter (year == "2007") %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_histogram(aes(y=..density..),bins = 35) + 
+  geom_density(fill = "green", alpha = 0.2)
 
+
+#looking more closely at the spread of density where gdpPercap is less than 10 000:
+
+gapminder 
 ```
 
 
