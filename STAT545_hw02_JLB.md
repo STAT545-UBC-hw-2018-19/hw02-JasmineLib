@@ -403,25 +403,85 @@ gapminder %>%
 ![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-16-1.png)
 
 ``` r
-#looking more closely at the spread of density where gdpPercap is less than 10 000:
+#looking more closely at the spread of density where gdpPercap is less than  5000:
 
-gapminder 
+gapminder %>% 
+  filter (year == "2007" & gdpPercap < 5000) %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_histogram(bins = 20)
 ```
 
-    ## # A tibble: 1,704 x 6
-    ##    country     continent  year lifeExp      pop gdpPercap
-    ##    <fctr>      <fctr>    <int>   <dbl>    <int>     <dbl>
-    ##  1 Afghanistan Asia       1952    28.8  8425333       779
-    ##  2 Afghanistan Asia       1957    30.3  9240934       821
-    ##  3 Afghanistan Asia       1962    32.0 10267083       853
-    ##  4 Afghanistan Asia       1967    34.0 11537966       836
-    ##  5 Afghanistan Asia       1972    36.1 13079460       740
-    ##  6 Afghanistan Asia       1977    38.4 14880372       786
-    ##  7 Afghanistan Asia       1982    39.9 12881816       978
-    ##  8 Afghanistan Asia       1987    40.8 13867957       852
-    ##  9 Afghanistan Asia       1992    41.7 16317921       649
-    ## 10 Afghanistan Asia       1997    41.8 22227415       635
-    ## # ... with 1,694 more rows
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-16-2.png)
+
+``` r
+#Table showing the 20 countries with the lowest GDP per capita in 2007, in ascending order. 
+gapminder %>%
+  filter (year == "2007") %>% 
+  select (country, gdpPercap) %>% 
+  top_n (-20) %>% 
+  arrange(gdpPercap)
+```
+
+    ## Selecting by gdpPercap
+
+    ## # A tibble: 20 x 2
+    ##    country                  gdpPercap
+    ##    <fctr>                       <dbl>
+    ##  1 Congo, Dem. Rep.               278
+    ##  2 Liberia                        415
+    ##  3 Burundi                        430
+    ##  4 Zimbabwe                       470
+    ##  5 Guinea-Bissau                  579
+    ##  6 Niger                          620
+    ##  7 Eritrea                        641
+    ##  8 Ethiopia                       691
+    ##  9 Central African Republic       706
+    ## 10 Gambia                         753
+    ## 11 Malawi                         759
+    ## 12 Mozambique                     824
+    ## 13 Sierra Leone                   863
+    ## 14 Rwanda                         863
+    ## 15 Togo                           883
+    ## 16 Somalia                        926
+    ## 17 Guinea                         943
+    ## 18 Myanmar                        944
+    ## 19 Afghanistan                    975
+    ## 20 Comoros                        986
+
+``` r
+#Table showing the 20 countries with highest GDP per capita in 2007 in ascending order
+gapminder %>%
+  filter (year == "2007") %>% 
+  select (country, gdpPercap) %>% 
+  top_n (20) %>% 
+  arrange(gdpPercap)
+```
+
+    ## Selecting by gdpPercap
+
+    ## # A tibble: 20 x 2
+    ##    country          gdpPercap
+    ##    <fctr>               <dbl>
+    ##  1 France               30470
+    ##  2 Japan                31656
+    ##  3 Germany              32170
+    ##  4 United Kingdom       33203
+    ##  5 Finland              33207
+    ##  6 Belgium              33693
+    ##  7 Sweden               33860
+    ##  8 Australia            34435
+    ##  9 Denmark              35278
+    ## 10 Austria              36126
+    ## 11 Iceland              36181
+    ## 12 Canada               36319
+    ## 13 Netherlands          36798
+    ## 14 Switzerland          37506
+    ## 15 Hong Kong, China     39725
+    ## 16 Ireland              40676
+    ## 17 United States        42952
+    ## 18 Singapore            47143
+    ## 19 Kuwait               47307
+    ## 20 Norway               49357
 
 ``` r
 gapminder %>%
@@ -442,6 +502,19 @@ gapminder %>%
 Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
 
 ``` r
+?filter()
+```
+
+    ## Help on topic 'filter' was found in the following packages:
+    ## 
+    ##   Package               Library
+    ##   dplyr                 /Library/Frameworks/R.framework/Versions/3.3/Resources/library
+    ##   stats                 /Library/Frameworks/R.framework/Versions/3.3/Resources/library
+    ## 
+    ## 
+    ## Using the first match ...
+
+``` r
 filter(gapminder, country == c("Rwanda", "Afghanistan"))
 ```
 
@@ -460,3 +533,31 @@ filter(gapminder, country == c("Rwanda", "Afghanistan"))
     ## 10 Rwanda      Africa     1982    46.2  5507565       882
     ## 11 Rwanda      Africa     1992    23.6  7290203       737
     ## 12 Rwanda      Africa     2002    43.4  7852401       786
+
+``` r
+#looking at the data that results from this code, the analyst's code returns 12 rows of data. 
+#when I run the code below: 
+gapminder %>% 
+  filter (country =="Rwanda" | country == "Afghanistan")
+```
+
+    ## # A tibble: 24 x 6
+    ##    country     continent  year lifeExp      pop gdpPercap
+    ##    <fctr>      <fctr>    <int>   <dbl>    <int>     <dbl>
+    ##  1 Afghanistan Asia       1952    28.8  8425333       779
+    ##  2 Afghanistan Asia       1957    30.3  9240934       821
+    ##  3 Afghanistan Asia       1962    32.0 10267083       853
+    ##  4 Afghanistan Asia       1967    34.0 11537966       836
+    ##  5 Afghanistan Asia       1972    36.1 13079460       740
+    ##  6 Afghanistan Asia       1977    38.4 14880372       786
+    ##  7 Afghanistan Asia       1982    39.9 12881816       978
+    ##  8 Afghanistan Asia       1987    40.8 13867957       852
+    ##  9 Afghanistan Asia       1992    41.7 16317921       649
+    ## 10 Afghanistan Asia       1997    41.8 22227415       635
+    ## # ... with 14 more rows
+
+``` r
+#I get 24 rows of data. It appears that somehow, by concatenating the countries he wanted to collect data for, the analyst ommitted half of the rows. 
+
+#why?
+```

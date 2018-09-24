@@ -203,9 +203,27 @@ gapminder %>%
   geom_density(fill = "green", alpha = 0.2)
 
 
-#looking more closely at the spread of density where gdpPercap is less than 10 000:
+#looking more closely at the spread of density where gdpPercap is less than  5000:
 
-gapminder 
+gapminder %>% 
+  filter (year == "2007" & gdpPercap < 5000) %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_histogram(bins = 20)
+ 
+#Table showing the 20 countries with the lowest GDP per capita in 2007, in ascending order. 
+gapminder %>%
+  filter (year == "2007") %>% 
+  select (country, gdpPercap) %>% 
+  top_n (-20) %>% 
+  arrange(gdpPercap)
+
+#Table showing the 20 countries with highest GDP per capita in 2007 in ascending order
+gapminder %>%
+  filter (year == "2007") %>% 
+  select (country, gdpPercap) %>% 
+  top_n (20) %>% 
+  arrange(gdpPercap)
+
 ```
 
 
@@ -226,8 +244,36 @@ gapminder %>%
  - A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries.
 ####Extra Exercise:
 
+
+
+
+
+
 Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
 ```{r}
+?filter()
+
+
 filter(gapminder, country == c("Rwanda", "Afghanistan"))
+
+#looking at the data that results from this code, the analyst's code returns 12 rows of data. 
+#when I run the code below: 
+gapminder %>% 
+  filter (country =="Rwanda" | country == "Afghanistan")
+#I get 24 rows of data. It appears that somehow, by concatenating the countries he wanted to collect data for, the analyst ommitted half of the rows. 
+
+#why?
+
+
+
 ```
+
+
+
+
+
+
+
+
+
 
