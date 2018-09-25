@@ -31,7 +31,7 @@ Explore the gapminder object:
 **2a. Is it a dataframe, matrix, vector, list?**  
 The typeof() function will tell me what data types gapminder contains.   
 The class() function will tell me the class of the object gapminder.
-```{r}
+```{r} 
 ?gapminder
 typeof(gapminder)
 class(gapminder)
