@@ -10,10 +10,10 @@ The different sections of this homework are broken down into the sections outlin
 **Homework 2 Task list: **  
 
 1. [x] Getting Started: Install Gapminder & dyplyr  
-2. [ ]Smell test the data: Explore the gapminder object  
-3. [ ]Explore individual variables:  
-4. [ ]Explore various plot types:   
-5. [ ]Extra exercise:   
+2. [x]Smell test the data: Explore the gapminder object  
+3. [x]Explore individual variables:  
+4. [x]Explore various plot types:   
+5. [x]Extra exercise:   
 6. [ ]Conclusions and Reflection:  
 
 
@@ -65,7 +65,9 @@ There are 1704 observations in gapminder.
 I found additional information on how to further explore gapminder [here](http://adv-r.had.co.nz/Data-structures.html)
 ```{r}
 ?gapminder
+dim(gapminder) #returns the number of rows and columns, respectively.
 length(gapminder) 
+levels(gapminder$continent)
 #attributes(gapminder)
 ```
 Conclusion: 
