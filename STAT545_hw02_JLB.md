@@ -194,8 +194,6 @@ gapminder_CAN_USA = gapminder %>%
   ggtitle("North American Population Trends")
 ```
 
-https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/Scatterplot%20Canada%20USA%20Population-1.png?raw=true
-
 ![plot](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/Scatterplot%20Canada%20USA%20Population-1.png?raw=true)
 
 I will compare GDP per Capita in Canada and the United States from 1952-2007.
@@ -208,8 +206,7 @@ I will compare GDP per Capita in Canada and the United States from 1952-2007.
   ylab("GDP Per Capita") +
   ggtitle("North American GDP Per Capita Trends")
 ```
-
-![](STAT545_hw02_JLB_files/figure-markdown_github/Scatterplot%20Canada%20USA%20GDP%20per%20Capita-1.png)
+![](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/Scatterplot%20Canada%20USA%20GDP%20per%20Capita-1.png?raw=true)
 
 **4b. A plot of one quantitative variable.**
 
@@ -228,7 +225,7 @@ gapminder_2007 = gapminder %>%
   ggtitle("Histogram of GDP Per Capita in 2007")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/Histogram%20Plot%20GDP%20per%20Capita%202007-1.png)
+![](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/Histogram%20Plot%20GDP%20per%20Capita%202007-1.png?raw=true)
 
 **4c. A plot of one quantitative variable and one categorical.**
 
@@ -244,7 +241,7 @@ I will plot the gdp per capita of various continents in 2007.
   ggtitle("GDP Per Capita by Continent in 2007")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/GDP%20per%20capita%20by%20continent%20in%202007-1.png)
+![](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/GDP%20per%20capita%20by%20continent%20in%202007-1.png?raw=true)
 
 **4d. Exploring other dyplr functions beyond filter() and select()**
 
@@ -266,7 +263,7 @@ gapminder_2007 %>%
   ggtitle("GDP in 2007 by Continent")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/GDP%20by%20Continent%20in%202007-1.png)
+![](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/GDP%20by%20Continent%20in%202007-1.png?raw=true)
 
 **The between() function: **
 
@@ -283,7 +280,7 @@ gapminder_2007 %>%
   ggtitle("Countries with GDP per capita between 30 and 50k")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/Countries%20with%20GDP%20per%20Capita%20between%2030%20and%2050k-1.png)
+![](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/Countries%20with%20GDP%20per%20Capita%20between%2030%20and%2050k-1.png?raw=true)
 
 **The top\_n() function **
 
