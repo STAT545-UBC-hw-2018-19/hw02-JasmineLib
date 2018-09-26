@@ -24,14 +24,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
     ## ✔ tibble  1.4.1     ✔ dplyr   0.7.4
     ## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
     ## ✔ readr   1.1.1     ✔ forcats 0.2.0
 
-    ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -44,7 +44,7 @@ The typeof() function will tell me what data types gapminder contains.
 The class() function will tell me the class of the object gapminder.
 
 ``` r
-?gapminder
+#?gapminder
 typeof(gapminder)
 ```
 
@@ -100,28 +100,22 @@ dim(gapminder) #returns the number of rows and columns, respectively.
     ## [1] 1704    6
 
 ``` r
-length(gapminder) 
+length(gapminder) #returns the number of columns
 ```
 
     ## [1] 6
 
 ``` r
-levels(gapminder$continent)
+levels(gapminder$continent) #returns the groups in a particular variable
 ```
 
     ## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
 
-``` r
-#attributes(gapminder)
-```
-
 Conclusion:
-
-1.  using ?gapminder is another way to get information about gapminder such as format, names and types of variables in the object, and specific descriptions of each variable. context: This function is useful for getting a quick overview and understanding the data and where it comes from.
-
-2.  length(gapminder) returns the number of elements inside it, in this case, the number of variables. Another application of the length() function is to look at length of and array variable, allowing users to make a loop that repeats for each value in the array.
-
-3.  the attributes(gapminder) function is similar to summary(), but gives information about row names as well. In this context the row names are simply numbers 1, 2, 3, etc... (so, less useful), but in other contexts these names may be more informative.
+- ?gapminder is another way to get information about gapminder such as format, names and types of variables in the object, and specific descriptions of each variable.
+context: This function is useful for getting a quick overview and understanding the data and where it comes from.
+- length(gapminder) returns the number of elements inside it. The length() function might be used to make a loop that repeats for each value in the array.
+- the levels(), attributes(), and summary() functions can provide useful information about the variables inside a dataset, as well as basic statistical information about these.
 
 **2f What data type is each variable?**
 using the str() function allows us to look at the structure of the variables
@@ -145,16 +139,26 @@ class(gapminder$year)
 
     ## [1] "integer"
 
-Conclusion: The variables in gapminder are lists containing different datatypes: country - factors continent - factors year - integers lifeExp - numbers pop - integers gdpPercap - numbers
+Conclusion:
+The variables in gapminder are lists containing different datatypes:
+- country - factors
+- continent - factors
+- year - integers
+- lifeExp - numbers
+- pop - integers
+- gdpPercap - numbers
 
 #### 3. Explore individual variables
 
-Categorical variable selected: continent Quantitative variable selected: gdpPercap
+Categorical variable selected: continent
+Quantitative variable selected: gdpPercap
 
 \*\* 3a. Exploring possible values (or range, whichever is appropriate) of variables:\*\*
 
 I can look at the range of GDP per capitda in the data:
 The min() function shows the lowest, while the max() function shows the highest GDP per Capita. The range() function gives both min and max as an output.
+The levels() or attribute() function (seen above), gives information about what groups are contained in the continent categorical variable.
+alternatively, attributes(gapminder$continent) returns information on the levels and class of the continent variable.
 
 ``` r
 min(gapminder$gdpPercap)
@@ -174,81 +178,24 @@ range(gapminder$gdpPercap)
 
     ## [1]    241.1659 113523.1329
 
+``` r
+levels(gapminder$continent)
+```
+
+    ## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
+
 **Conclusion:**
-the range of GDP per capitda in the gapminder dataset is $241-113 523.
+- The range of GDP per capitda in the gapminder dataset is $241-113 523.
+- The possible values of the continent variable are: Africa, Americas, Asia, Europe, and Oceania. - By inspection, the range of values contained in GDP per capita and the possible values contained in the continent variable seem appropriate.
 
-Looking at the spread of values :
+#### 4. Explore various plot types
 
-``` r
-#spread(gapminder, key,value)
-```
+**4a. A scatterplot of two quantitative variables.**
 
-I can also use the min(), max() and range() functions with the lifeExp, because it contains integers, however, this will not work for the country variable, as these functions do not apply.
-
-``` r
-min(gapminder$lifeExp)
-```
-
-    ## [1] 23.599
+I will compare population growth in Canada and the United States from 1952-2007.
 
 ``` r
-max(gapminder$lifeExp)
-```
-
-    ## [1] 82.603
-
-``` r
-range(gapminder$lifeExp)
-```
-
-    ## [1] 23.599 82.603
-
-Conclusion: The range of life expectancies contained in the gapminder dataset is 23.6 - 82.6 years.
-
-To look at the distribution of the continent variable:
-
-``` r
-attributes(gapminder$continent)
-```
-
-    ## $levels
-    ## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania" 
-    ## 
-    ## $class
-    ## [1] "factor"
-
-These values seem typical, as they are representative of the world's continents.
-
-SUMMARY TABLE:
-
-Looking more closely at the country and lifeExp variables:
-
-``` r
-select(gapminder, country, year, lifeExp) %>% 
-  filter(year == "2007") %>% 
-  summary()
-```
-
-    ##         country         year         lifeExp     
-    ##  Afghanistan:  1   Min.   :2007   Min.   :39.61  
-    ##  Albania    :  1   1st Qu.:2007   1st Qu.:57.16  
-    ##  Algeria    :  1   Median :2007   Median :71.94  
-    ##  Angola     :  1   Mean   :2007   Mean   :67.01  
-    ##  Argentina  :  1   3rd Qu.:2007   3rd Qu.:76.41  
-    ##  Australia  :  1   Max.   :2007   Max.   :82.60  
-    ##  (Other)    :136
-
-#### Explore various plot types
-
-useful [site](https://stackoverflow.com/questions/10438752/adding-x-and-y-axis-labels-in-ggplot2) for how to add axis labels and title for your ggplot
-
--   A scatterplot of two quantitative variables.
-
-``` r
-#similar to how we saw filtering by a variable such as 'country' in class for geom_line, we can also do this to assign colours using colour = country. 
-
 gapminder %>% 
-  
   filter(country == "Canada"|country == "United States") %>% 
   ggplot(aes(x=year, y=pop)) + 
   geom_point() +
@@ -260,7 +207,9 @@ gapminder %>%
 
     ## Warning: Ignoring unknown aesthetics: filter
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-14-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/Explore%20Plot%20Types%20-%20Scatterplot-1.png)
+
+I will compare GDP per Capita in Canada and the United States from 1952-2007.
 
 ``` r
 gapminder %>% 
@@ -273,122 +222,120 @@ gapminder %>%
   ggtitle("North American GDP Per Capita Trends")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-15-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/Explore%20gdpPercap%20trends-1.png)
 
--   A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.
+**4b. A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.**
 
 ``` r
 gapminder %>%
   filter (year == "2007") %>% 
   ggplot(aes(gdpPercap)) +
   geom_histogram(aes(y=..density..),bins = 35) + 
-  geom_density(fill = "green", alpha = 0.2)
+  geom_density(fill = "green", alpha = 0.2) +
+  scale_x_log10() +
+  xlab("GDP Per Capita log x") +
+  ylab("Density") +
+  ggtitle("Histogram of GDP Per Capita")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-16-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/Histogram%20Plot%20quantitative-1.png)
 
-``` r
-#looking more closely at the spread of density where gdpPercap is less than  5000:
-
-gapminder %>% 
-  filter (year == "2007" & gdpPercap < 5000) %>% 
-  ggplot(aes(gdpPercap)) +
-  geom_histogram(bins = 20)
-```
-
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-16-2.png)
-
-``` r
-#Table showing the 20 countries with the lowest GDP per capita in 2007, in ascending order. 
-gapminder %>%
-  filter (year == "2007") %>% 
-  select (country, gdpPercap) %>% 
-  top_n (-20) %>% 
-  arrange(gdpPercap)
-```
-
-    ## Selecting by gdpPercap
-
-    ## # A tibble: 20 x 2
-    ##    country                  gdpPercap
-    ##    <fctr>                       <dbl>
-    ##  1 Congo, Dem. Rep.               278
-    ##  2 Liberia                        415
-    ##  3 Burundi                        430
-    ##  4 Zimbabwe                       470
-    ##  5 Guinea-Bissau                  579
-    ##  6 Niger                          620
-    ##  7 Eritrea                        641
-    ##  8 Ethiopia                       691
-    ##  9 Central African Republic       706
-    ## 10 Gambia                         753
-    ## 11 Malawi                         759
-    ## 12 Mozambique                     824
-    ## 13 Sierra Leone                   863
-    ## 14 Rwanda                         863
-    ## 15 Togo                           883
-    ## 16 Somalia                        926
-    ## 17 Guinea                         943
-    ## 18 Myanmar                        944
-    ## 19 Afghanistan                    975
-    ## 20 Comoros                        986
-
-``` r
-#Table showing the 20 countries with highest GDP per capita in 2007 in ascending order
-gapminder %>%
-  filter (year == "2007") %>% 
-  select (country, gdpPercap) %>% 
-  top_n (20) %>% 
-  arrange(gdpPercap)
-```
-
-    ## Selecting by gdpPercap
-
-    ## # A tibble: 20 x 2
-    ##    country          gdpPercap
-    ##    <fctr>               <dbl>
-    ##  1 France               30470
-    ##  2 Japan                31656
-    ##  3 Germany              32170
-    ##  4 United Kingdom       33203
-    ##  5 Finland              33207
-    ##  6 Belgium              33693
-    ##  7 Sweden               33860
-    ##  8 Australia            34435
-    ##  9 Denmark              35278
-    ## 10 Austria              36126
-    ## 11 Iceland              36181
-    ## 12 Canada               36319
-    ## 13 Netherlands          36798
-    ## 14 Switzerland          37506
-    ## 15 Hong Kong, China     39725
-    ## 16 Ireland              40676
-    ## 17 United States        42952
-    ## 18 Singapore            47143
-    ## 19 Kuwait               47307
-    ## 20 Norway               49357
+**4c. A plot of one quantitative variable and one categorical.**
 
 ``` r
 gapminder %>%
   select(gdpPercap, continent) %>% 
   ggplot(aes(continent, gdpPercap)) +
   scale_y_log10() +
-  geom_violin() +
+  geom_violin(fill = "darkslategray1", alpha = 0.5) +
   geom_jitter(alpha = 0.15) +
   xlab("Continent")+
   ylab("GDP Per Capita (log10)") +
   ggtitle("GDP Per Capita by Continent")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-17-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
--   A plot of one quantitative variable and one categorical. Maybe boxplots for several continents or countries. \#\#\#\#Extra Exercise:
+**4d. Exploring other dyplr functions beyond filter() and select()**
+
+\*\* The mutate() function:\*\*
+The mutate function can be used to create a new variable by making changes to existing data. Here I will multiply the GDP per capita by the population to examine the GDP
+
+``` r
+gapminder %>% 
+  filter (year =="2007") %>% 
+  mutate(GDP = gdpPercap * pop) %>% 
+  ggplot(aes(continent, GDP)) + geom_jitter(alpha = 0.5) +
+  scale_y_log10() +
+  ylab("Gross Domestic Product") +
+  xlab("Continent") +
+  ggtitle("GDP per Capita in 2007 by Continent")
+```
+
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+\*\* The between() function: \*\*
+The between() function selects for values of a variable between two assigned values.
+
+``` r
+gapminder %>% 
+  filter (year == "2007" & between(gdpPercap, 0,5000) ) %>% 
+  ggplot(aes(gdpPercap)) + geom_histogram(aes(fill = continent), bins = 10) +
+  facet_wrap(~continent)
+```
+
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-3-1.png)
+
+\*\* The top\_n() function \*\*
+The top\_n() function can be used to select the top (or bottom) values in a data set
+
+``` r
+#Table showing the 5 countries with the lowest GDP per capita in 2007, in ascending order. 
+gapminder %>%
+  filter (year == "2007") %>% 
+  select (country, gdpPercap) %>% 
+  top_n (-5) %>% 
+  arrange(gdpPercap)
+```
+
+    ## Selecting by gdpPercap
+
+    ## # A tibble: 5 x 2
+    ##   country          gdpPercap
+    ##   <fctr>               <dbl>
+    ## 1 Congo, Dem. Rep.       278
+    ## 2 Liberia                415
+    ## 3 Burundi                430
+    ## 4 Zimbabwe               470
+    ## 5 Guinea-Bissau          579
+
+``` r
+#Table showing the 5 countries with highest GDP per capita in 2007 in ascending order
+gapminder %>%
+  filter (year == "2007") %>% 
+  select (country, gdpPercap) %>% 
+  top_n (5) %>% 
+  arrange(gdpPercap)
+```
+
+    ## Selecting by gdpPercap
+
+    ## # A tibble: 5 x 2
+    ##   country       gdpPercap
+    ##   <fctr>            <dbl>
+    ## 1 Ireland           40676
+    ## 2 United States     42952
+    ## 3 Singapore         47143
+    ## 4 Kuwait            47307
+    ## 5 Norway            49357
+
+#### 5.Extra Exercise:
 
 Instructions: Evaluate this code and describe the result. Presumably the analyst’s intent was to get the data for Rwanda and Afghanistan. Did they succeed? Why or why not? If not, what is the correct way to do this?
 
-``` r
-#no they were not successful. 
+Result: No the analyst was not successful.
 
+``` r
 filter(gapminder, country == c("Rwanda", "Afghanistan"))
 ```
 
