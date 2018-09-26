@@ -194,7 +194,9 @@ gapminder_CAN_USA = gapminder %>%
   ggtitle("North American Population Trends")
 ```
 
-![Scatterplot](hw02-JasmineLib/ggPlot Figures/Scatterplot Canada USA Population-1.png)
+https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/Scatterplot%20Canada%20USA%20Population-1.png?raw=true
+
+![plot](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/ggPlot%20Figures/Scatterplot%20Canada%20USA%20Population-1.png?raw=true)
 
 I will compare GDP per Capita in Canada and the United States from 1952-2007.
 
