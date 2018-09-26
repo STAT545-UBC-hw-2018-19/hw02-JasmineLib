@@ -8,12 +8,12 @@ The different sections of this homework are broken down into the sections outlin
 
 **Homework 2 Task list: **
 
-1.  \[x\] Getting Started: Install Gapminder & dyplyr
-2.  \[x\]Smell test the data: Explore the gapminder object
-3.  \[x\]Explore individual variables:
-4.  \[x\]Explore various plot types:
-5.  \[x\]Extra exercise:
-6.  \[x\]Conclusions and Reflection:
+1.  Getting Started: Install Gapminder & dyplyr
+2.  Smell test the data: Explore the gapminder object
+3.  Explore individual variables
+4.  Explore various plot types
+5.  Extra exercise
+6.  Conclusions and Reflection
 
 ### 1. Getting Started:
 
@@ -24,17 +24,6 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
-
-    ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
-    ## ✔ tibble  1.4.1     ✔ dplyr   0.7.4
-    ## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
-    ## ✔ readr   1.1.1     ✔ forcats 0.2.0
-
-    ## ── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-    ## ✖ dplyr::filter() masks stats::filter()
-    ## ✖ dplyr::lag()    masks stats::lag()
-
 ### 2. Smell test the data:
 
 Explore the gapminder object:
@@ -44,7 +33,6 @@ The typeof() function will tell me what data types gapminder contains.
 The class() function will tell me the class of the object gapminder.
 
 ``` r
-#?gapminder
 typeof(gapminder)
 ```
 
@@ -56,7 +44,8 @@ class(gapminder)
 
     ## [1] "tbl_df"     "tbl"        "data.frame"
 
-Conclusion: - Gapminder is a data frame that contains list data.
+Conclusion:
+- Gapminder is a data frame that contains list data.
 
 **2b. What is its class?**
 As shown above, we can use the class() function to determine the class of the gapminder object:
@@ -67,7 +56,8 @@ As shown above, we can use the class() function to determine the class of the ga
 
     ## [1] "tbl_df"     "tbl"        "data.frame"
 
-Conclusion: The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
+Conclusion:
+- The class of gapminder is a data frame, specifically, a tibble (which we have not yet explored in class)
 
 **2c. How many columns/variables?**
 
@@ -77,7 +67,8 @@ Conclusion: The class of gapminder is a data frame, specifically, a tibble (whic
 
     ## [1] 6
 
-Conclusion: There are 6 variables in gapminder.
+Conclusion:
+- There are 6 variables in gapminder.
 
 **2d. How many rows/observations?**
 
@@ -87,13 +78,13 @@ Conclusion: There are 6 variables in gapminder.
 
     ## [1] 1704
 
-Conclusion: There are 1704 observations in gapminder.
+Conclusion:
+- There are 1704 observations in gapminder.
 
 **2e Can you get these facts about “extent” or “size” in more than one way? Can you imagine different functions being useful in different contexts?**
 I found additional information on how to further explore gapminder [here](http://adv-r.had.co.nz/Data-structures.html)
 
 ``` r
-?gapminder
 dim(gapminder) #returns the number of rows and columns, respectively.
 ```
 
@@ -112,7 +103,7 @@ levels(gapminder$continent) #returns the groups in a particular variable
     ## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
 
 Conclusion:
-- ?gapminder is another way to get information about gapminder such as format, names and types of variables in the object, and specific descriptions of each variable.
+- using ?gapminder in the console is another way to get information about gapminder such as format, names and types of variables in the object, and specific descriptions of each variable.
 context: This function is useful for getting a quick overview and understanding the data and where it comes from.
 - length(gapminder) returns the number of elements inside it. The length() function might be used to make a loop that repeats for each value in the array.
 - the levels(), attributes(), and summary() functions can provide useful information about the variables inside a dataset, as well as basic statistical information about these.
@@ -155,37 +146,32 @@ Quantitative variable selected: gdpPercap
 
 **3a. Exploring possible values (or range, whichever is appropriate) of variables:**
 
-I can look at the range of GDP per capitda in the data:
-The min() function shows the lowest, while the max() function shows the highest GDP per Capita. The range() function gives both min and max as an output.
-The levels() or attribute() function (seen above), gives information about what groups are contained in the continent categorical variable.
-alternatively, attributes(gapminder$continent) returns information on the levels and class of the continent variable.
-
 ``` r
-min(gapminder$gdpPercap)
+min(gapminder$gdpPercap) #returns minimum value of gdpPercap
 ```
 
     ## [1] 241.1659
 
 ``` r
-max(gapminder$gdpPercap)
+max(gapminder$gdpPercap) #returns maximum value of gdpPercap
 ```
 
     ## [1] 113523.1
 
 ``` r
-range(gapminder$gdpPercap)
+range(gapminder$gdpPercap) #returns the range lowest and highest values of gdpPercap
 ```
 
     ## [1]    241.1659 113523.1329
 
 ``` r
-levels(gapminder$continent)
+levels(gapminder$continent)#returns the groups or levels contained in the continent variable
 ```
 
     ## [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania"
 
-**Conclusion:**
-- The range of GDP per capitda in the gapminder dataset is $241-113 523.
+Conclusion:
+- The range of GDP per capita in the gapminder dataset is $241-113 523.
 - The possible values of the continent variable are: Africa, Americas, Asia, Europe, and Oceania. - By inspection, the range of values contained in GDP per capita and the possible values contained in the continent variable seem appropriate.
 
 #### 4. Explore various plot types
@@ -195,26 +181,23 @@ levels(gapminder$continent)
 I will compare population growth in Canada and the United States from 1952-2007.
 
 ``` r
-gapminder %>% 
-  filter(country == "Canada"|country == "United States") %>% 
-  ggplot(aes(x=year, y=pop)) + 
+gapminder_CAN_USA = gapminder %>% 
+  filter(country == "Canada"|country == "United States")
+  
+  ggplot(gapminder_CAN_USA, aes(x=year, y=pop)) + 
   geom_point() +
-  geom_line(aes(filter = country,colour = country)) +
+  geom_line(aes(colour = country)) +
   xlab("Year") +
   ylab("Population of Canada and United States") +
   ggtitle("North American Population Trends")
 ```
-
-    ## Warning: Ignoring unknown aesthetics: filter
 
 ![](STAT545_hw02_JLB_files/figure-markdown_github/Explore%20Plot%20Types%20-%20Scatterplot-1.png)
 
 I will compare GDP per Capita in Canada and the United States from 1952-2007.
 
 ``` r
-gapminder %>% 
-  filter(country == "Canada" | country =="United States")%>% 
-  ggplot(aes(x=year, y = gdpPercap)) +
+  ggplot(gapminder_CAN_USA,aes(x=year, y = gdpPercap)) +
   geom_line(aes(group = country, colour = country)) +
   geom_point() +
   xlab("Year") +
@@ -224,62 +207,70 @@ gapminder %>%
 
 ![](STAT545_hw02_JLB_files/figure-markdown_github/Explore%20gdpPercap%20trends-1.png)
 
-**4b. A plot of one quantitative variable. Maybe a histogram or densityplot or frequency polygon.**
+**4b. A plot of one quantitative variable.**
+
+I will make a histogram of GDP per capita in 2007. I will first assign the filtered gapminder dataframe for the year 2007, as I will use this for subsequent plots.
 
 ``` r
-gapminder %>%
-  filter (year == "2007") %>% 
-  ggplot(aes(gdpPercap)) +
+gapminder_2007 = gapminder %>%
+  filter (year == "2007")
+
+  ggplot(gapminder_2007, aes(gdpPercap)) +
   geom_histogram(aes(y=..density..),bins = 35) + 
-  geom_density(fill = "green", alpha = 0.2) +
+  geom_density(fill = "red", alpha = 0.2) +
   scale_x_log10() +
-  xlab("GDP Per Capita log x") +
+  xlab("GDP Per Capita") +
   ylab("Density") +
-  ggtitle("Histogram of GDP Per Capita")
+  ggtitle("Histogram of GDP Per Capita in 2007")
 ```
 
 ![](STAT545_hw02_JLB_files/figure-markdown_github/Histogram%20Plot%20quantitative-1.png)
 
 **4c. A plot of one quantitative variable and one categorical.**
 
+I will plot the gdp per capita of various continents in 2007.
+
 ``` r
-gapminder %>%
-  select(gdpPercap, continent) %>% 
-  ggplot(aes(continent, gdpPercap)) +
+  ggplot(gapminder_2007, aes(continent, gdpPercap)) +
   scale_y_log10() +
   geom_violin(fill = "darkslategray1", alpha = 0.5) +
-  geom_jitter(alpha = 0.15) +
+  geom_jitter(alpha = 0.33) +
   xlab("Continent")+
-  ylab("GDP Per Capita (log10)") +
-  ggtitle("GDP Per Capita by Continent")
+  ylab("GDP Per Capita") +
+  ggtitle("GDP Per Capita by Continent in 2007")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/GDP%20per%20capita%20by%20continent-1.png)
 
 **4d. Exploring other dyplr functions beyond filter() and select()**
 
 **The mutate() function:**
-The mutate function can be used to create a new variable by making changes to existing data. Here I will multiply the GDP per capita by the population to examine the GDP
+
+The mutate function can be used to create a new variable by making changes to existing data.
+Here I will multiply the GDP per capita by the population to examine the GDP of countries, organized by continent.
 
 ``` r
-gapminder %>% 
-  filter (year =="2007") %>% 
+gapminder_2007 %>% 
   mutate(GDP = gdpPercap * pop) %>% 
-  ggplot(aes(continent, GDP)) + geom_jitter(alpha = 0.5) +
+  ggplot(aes(continent, GDP)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.2) +
   scale_y_log10() +
   ylab("Gross Domestic Product") +
   xlab("Continent") +
   ggtitle("GDP per Capita in 2007 by Continent")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
 **The between() function: **
+
 The between() function selects for values of a variable between two assigned values.
+Here I will look at the countries with a GDP Per capita between two values for the year 2007.
 
 ``` r
-gapminder %>% 
-  filter (year == "2007" & between(gdpPercap, 30000,50000) ) %>% 
+gapminder_2007 %>% 
+  filter (between(gdpPercap, 30000,50000) ) %>% 
   ggplot(aes(gdpPercap)) + geom_histogram(aes(fill = continent), bins = 10) +
   facet_wrap(~continent)+
   ylab("Count") +
@@ -287,15 +278,15 @@ gapminder %>%
   ggtitle("Countries with GDP per capita between 30 and 50k")
 ```
 
-![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](STAT545_hw02_JLB_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 **The top\_n() function **
-The top\_n() function can be used to select the top (or bottom) values in a data set
+
+The top\_n() function can be used to select the top (or bottom) values in a data set. Here I will show two tibbles showing the countries with the lowest and highest GDP per capita in 2007.
 
 ``` r
 #Table showing the 5 countries with the lowest GDP per capita in 2007, in ascending order. 
-gapminder %>%
-  filter (year == "2007") %>% 
+gapminder_2007 %>% 
   select (country, gdpPercap) %>% 
   top_n (-5) %>% 
   arrange(gdpPercap)
@@ -314,8 +305,7 @@ gapminder %>%
 
 ``` r
 #Table showing the 5 countries with highest GDP per capita in 2007 in ascending order
-gapminder %>%
-  filter (year == "2007") %>% 
+gapminder_2007 %>% 
   select (country, gdpPercap) %>% 
   top_n (5) %>% 
   arrange(gdpPercap)
@@ -360,7 +350,6 @@ filter(gapminder, country == c("Rwanda", "Afghanistan"))
 
 ``` r
 #looking at the output, the analyst's code returns 12 rows of data (6 for Rwanda, 6 for Afghanistan).   
-
 #However, when I run the code below I get 24 rows of data.
 
 gapminder %>% 
@@ -383,15 +372,17 @@ gapminder %>%
     ## # ... with 14 more rows
 
 When the analyst used c(), they ommitted half of the rows.
-Why? When we use c(), the code it will go row by row through the different countries it will compare row1 with "Rwanda" Then it will compare row2 with "Afghanistan".
-Then it will start over and evaluate row 3 == "Rwanda", and row 4 =="Afghanistan", etc.
+Why?
+When we use c(), the code it will go row by row through the different countries it will compare row1 with "Rwanda".
+Next, it will compare row2 with "Afghanistan".
+It will then start over and evaluate row 3 == "Rwanda", and row 4 =="Afghanistan", etc.
 If the result is TRUE, it will add it to the tibble.
 Therefore, when comparing to "Rwanda" it will return FALSE if the row contains "Afghanistan" and vice versa
 
-Testing if the above explanation is correct:
+To test if the above explanation is correct:
 
 If I run the code below, I should obtain 8 rows with values for Rwanda, but only 4 for Afghanistan
-Note - this is only applicable for this dataset, as I know there are equal numbers of rows for Rwanda and Afghanistan, and I know they are organized alphabetically.
+**Note** - this is only applicable for this dataset, as I know there are equal numbers of rows for Rwanda and Afghanistan, and I know they are organized alphabetically.
 
 ``` r
 filter(gapminder, country == c("Rwanda", "Afghanistan", "Rwanda"))
@@ -413,32 +404,41 @@ filter(gapminder, country == c("Rwanda", "Afghanistan", "Rwanda"))
     ## 11 Rwanda      Africa     1997    36.1  7212583       590
     ## 12 Rwanda      Africa     2007    46.2  8860588       863
 
-Interestingly, I noticed that the length of the combined list must be divisible into the number of rows in the dataframe.
-If I try to run the code shown below, it returns an error.
+Interestingly, If I run the code shown below, it returns a warning.
 
-filter(gapminder, country == c("Rwanda", "Afghanistan", "Norway", "China", "Japan"))
+``` r
+filter(gapminder, country == c("Rwanda", "Afghanistan", "Norway", "China", "Japan")) 
+```
 
-The reason for the error is because it must be able to fully cycle through the combined list and we cannot divide 5 into the number of rows of data in gapminder.
+    ## Warning in is.na(e1) | is.na(e2): longer object length is not a multiple of
+    ## shorter object length
+
+    ## Warning in `==.default`(country, c("Rwanda", "Afghanistan", "Norway",
+    ## "China", : longer object length is not a multiple of shorter object length
+
+    ## # A tibble: 13 x 6
+    ##    country     continent  year lifeExp        pop gdpPercap
+    ##    <fctr>      <fctr>    <int>   <dbl>      <int>     <dbl>
+    ##  1 Afghanistan Asia       1957    30.3    9240934       821
+    ##  2 Afghanistan Asia       1982    39.9   12881816       978
+    ##  3 Afghanistan Asia       2007    43.8   31889923       975
+    ##  4 China       Asia       1952    44.0  556263527       400
+    ##  5 China       Asia       1977    64.0  943455000       741
+    ##  6 China       Asia       2002    72.0 1280400000      3119
+    ##  7 Japan       Asia       1962    68.7   95831757      6577
+    ##  8 Japan       Asia       1987    78.7  122091325     22376
+    ##  9 Norway      Europe     1962    73.5    3638919     13450
+    ## 10 Norway      Europe     1987    75.9    4186147     31541
+    ## 11 Rwanda      Africa     1957    41.5    2822082       540
+    ## 12 Rwanda      Africa     1982    46.2    5507565       882
+    ## 13 Rwanda      Africa     2007    46.2    8860588       863
+
+The reason for the warning is because the list of countries is not fully cycled through, as we cannot divide 5 into the number of rows of data in gapminder.
 
 Conclusion:
-A correct way to filter the data without accidentally leaving out rows of data is shown below:
+- A correct way to filter the data without accidentally leaving out rows of data is shown below:
 
 ``` r
 gapminder %>% 
   filter (country =="Rwanda" | country == "Afghanistan")
 ```
-
-    ## # A tibble: 24 x 6
-    ##    country     continent  year lifeExp      pop gdpPercap
-    ##    <fctr>      <fctr>    <int>   <dbl>    <int>     <dbl>
-    ##  1 Afghanistan Asia       1952    28.8  8425333       779
-    ##  2 Afghanistan Asia       1957    30.3  9240934       821
-    ##  3 Afghanistan Asia       1962    32.0 10267083       853
-    ##  4 Afghanistan Asia       1967    34.0 11537966       836
-    ##  5 Afghanistan Asia       1972    36.1 13079460       740
-    ##  6 Afghanistan Asia       1977    38.4 14880372       786
-    ##  7 Afghanistan Asia       1982    39.9 12881816       978
-    ##  8 Afghanistan Asia       1987    40.8 13867957       852
-    ##  9 Afghanistan Asia       1992    41.7 16317921       649
-    ## 10 Afghanistan Asia       1997    41.8 22227415       635
-    ## # ... with 14 more rows
