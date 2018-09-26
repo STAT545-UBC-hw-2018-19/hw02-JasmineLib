@@ -16,6 +16,7 @@ In the homework you will find the following:
 6. [x]Conclusions and Reflection - Submitted on Canvas. 
 
 [Here](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/STAT545_hw02_JLB.md) is a link for the md file for homework 2.
+
 [Here](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/STAT545_hw02_JLB.Rmd) is a link for the Rmd file for homework 2.
 
 
