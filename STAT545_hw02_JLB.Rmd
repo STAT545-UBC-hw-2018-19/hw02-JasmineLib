@@ -16,6 +16,7 @@ The different sections of this homework are broken down into the sections outlin
 5. Extra exercise   
 6. Conclusions and Reflection    
 
+Something useful: A [guide](https://ggplot2.tidyverse.org/reference/annotation_logticks.html) to changing tick marks on axes when plotting graphs.
 
 ### 1. Getting Started:   
 Install/Load Gapminder and dyplyr (through the tidyverse package)
@@ -115,7 +116,7 @@ Conclusion:
  
 I will compare population growth in Canada and the United States from 1952-2007.
 
-```{r Explore Plot Types - Scatterplot}
+```{r Scatterplot Canada USA Population}
 gapminder_CAN_USA = gapminder %>% 
   filter(country == "Canada"|country == "United States")
   
@@ -130,7 +131,7 @@ gapminder_CAN_USA = gapminder %>%
 
 I will compare GDP per Capita in Canada and the United States from 1952-2007.
 
-```{r Explore gdpPercap trends}
+```{r Scatterplot Canada USA GDP per Capita}
 
   ggplot(gapminder_CAN_USA,aes(x=year, y = gdpPercap)) +
   geom_line(aes(group = country, colour = country)) +
@@ -146,14 +147,14 @@ I will compare GDP per Capita in Canada and the United States from 1952-2007.
 
  I will make a histogram of GDP per capita in 2007. 
  I will first assign the filtered gapminder dataframe for the year 2007, as I will use this for subsequent plots.
-```{r Histogram Plot quantitative }
+```{r Histogram Plot GDP per Capita 2007 }
 gapminder_2007 = gapminder %>%
   filter (year == "2007")
 
   ggplot(gapminder_2007, aes(gdpPercap)) +
-  geom_histogram(aes(y=..density..),bins = 35) + 
-  geom_density(fill = "red", alpha = 0.2) +
-  scale_x_log10() +
+  geom_histogram(aes(y=..density..), bins = 35, fill = "royalblue1", colour = "royalblue4") + 
+  geom_density(fill = "skyblue1", alpha = 0.2) +
+  scale_x_log10(labels = scales::trans_format("log10", scales::math_format(10^.x))) + #the labels = scales details makes for nicer x-axis ticks. 
   xlab("GDP Per Capita") +
   ylab("Density") +
   ggtitle("Histogram of GDP Per Capita in 2007")
@@ -163,10 +164,10 @@ gapminder_2007 = gapminder %>%
 **4c. A plot of one quantitative variable and one categorical.**
 
 I will plot the gdp per capita of various continents in 2007.
-```{r GDP per capita by continent}
+```{r GDP per capita by continent in 2007}
 
   ggplot(gapminder_2007, aes(continent, gdpPercap)) +
-  scale_y_log10() +
+  scale_y_log10(labels = scales::trans_format("log10", scales::math_format(10^.x))) +
   geom_violin(fill = "darkslategray1", alpha = 0.5) +
   geom_jitter(alpha = 0.33) +
   xlab("Continent")+
@@ -182,23 +183,24 @@ I will plot the gdp per capita of various continents in 2007.
 
 The mutate function can be used to create a new variable by making changes to existing data.  
 Here I will multiply the GDP per capita by the population to examine the GDP of countries, organized by continent.
-```{r}
+```{r GDP by Continent in 2007}
 gapminder_2007 %>% 
   mutate(GDP = gdpPercap * pop) %>% 
   ggplot(aes(continent, GDP)) +
   geom_boxplot() +
   geom_jitter(alpha = 0.2) +
-  scale_y_log10() +
+  scale_y_log10(breaks = scales::trans_breaks("log10", function(x) 10^x),
+   labels = scales::trans_format("log10", scales::math_format(10^.x))) +
   ylab("Gross Domestic Product") +
   xlab("Continent") +
-  ggtitle("GDP per Capita in 2007 by Continent")
+  ggtitle("GDP in 2007 by Continent")
 ```
  
 **The between() function: **  
 
 The between() function selects for values of a variable between two assigned values.   
 Here I will look at the countries with a GDP Per capita between two values for the year 2007. 
-```{r}
+```{r Countries with GDP per Capita between 30 and 50k}
 gapminder_2007 %>% 
   filter (between(gdpPercap, 30000,50000) ) %>% 
   ggplot(aes(gdpPercap)) + geom_histogram(aes(fill = continent), bins = 10) +
@@ -213,7 +215,7 @@ gapminder_2007 %>%
 
 The top_n() function can be used to select the top (or bottom) values in a data set. 
 Here I will show two tibbles showing the countries with the lowest and highest GDP per capita in 2007.
-```{r}
+```{r Top and Bottom 5 GDP countries}
 #Table showing the 5 countries with the lowest GDP per capita in 2007, in ascending order. 
 gapminder_2007 %>% 
   select (country, gdpPercap) %>% 
