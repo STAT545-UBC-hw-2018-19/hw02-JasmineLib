@@ -9,11 +9,11 @@ This homework takes a deeper look at the Gapminder dataset and explores various 
 In the homework you will find the following:
 
 1. [x] Getting Started: Install Gapminder & dyplyr  
-2. [x]Smell test the data: Explore the gapminder object  
-3. [x]Explore individual variables  - an exploration of the continent and gdpPercap variables
-4. [x]Explore various plot types - and an exploration of various dyplyr functions.
-5. [x]Extra exercise - explains why the c( ) function is not ideal for filtering data.
-6. [x]Conclusions and Reflection - Submitted on Canvas. 
+2. [x]Smell test the data: explore the gapminder object  
+3. [x]Explore individual variables: an exploration of the continent and gdpPercap variables
+4. [x]Explore various plot types in gapminder, and examine various dyplyr functions.
+5. [x]Extra exercise: explains why the c( ) function is not ideal for filtering data.
+6. [x]Conclusions and Reflection: submitted on Canvas. 
 
 [Here](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/STAT545_hw02_JLB.md) is a link for the md file for homework 2.
 
