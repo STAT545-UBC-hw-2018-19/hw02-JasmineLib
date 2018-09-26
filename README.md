@@ -20,4 +20,4 @@ In the homework you will find the following:
 
 [Here](https://github.com/STAT545-UBC-students/hw02-JasmineLib/blob/master/STAT545_hw02_JLB.Rmd) is a link for the Rmd file for homework 2.
 
-This Repo also contains output graphs for the assignment. 
+This Repo also contains [output graphs](https://github.com/STAT545-UBC-students/hw02-JasmineLib/tree/master/ggPlot%20Figures) for the assignment. 
